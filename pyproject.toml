@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fastnanquantile"
+version = "0.0.1"
+readme = "README.md"
+description = "A package for fast nanquantile calculation"
+keywords = ["numpy", "bottleneck", "xarray"]
+requires-python = ">=3.10"
+dependencies = [
+    "numba",
+    "numpy",
+]
+
+[project.optional-dependencies]
+xarray = ["xarray"]
+xarrayparallel = ["xarray[parallel]"]
+
+[tool.setuptools.packages.find]
+where = ["src"]  # list of folders that contain the packages (["."] by default)
+include = ["*"]  # package names should match these glob patterns (["*"] by default)
+#exclude = []  # exclude packages matching these glob patterns (empty by default)
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+line_length = 100
