@@ -1,12 +1,12 @@
 import math
-from typing import Any, List, Tuple, Union
+from typing import Any, Iterable, List, Optional, Tuple, Union
 
 import numpy as np
 from numba import njit
 
 
 def nanquantile(
-    x: np.ndarray, q: Union[float, List[float]], axis: Union[int, List[int]]
+    x: np.ndarray, q: Union[float, List[float]], axis: Optional[Union[int, List[int]]] = None
 ) -> np.ndarray:
     """An optimized version of numpy.nanquantile. It's faster than numpy.nanquantile.
     However, in some cases (depending on the array shape and reduction axis),
@@ -21,14 +21,20 @@ def nanquantile(
     Args:
         x (np.ndarray): input array.
         q (Union[float, List[float]]): quantile value(s) to be calculated. It can be a float or a list of floats.
-        axis (Union[int, List[int]]): axis along which the quantile(s) are calculated.
+        axis (Optional[Union[int, List[int]]]): axis along which the quantile(s) are calculated. If None, all indices are used. Defaults to None.
 
     Returns:
         np.ndarray: array with the quantile value(s) calculated.
     """
+    # Handle empty array to make the output compatible with numpy.nanquantile
+    if x.size == 0:
+        return np.nanquantile(x, q, axis)
     # Numba doesn't support float16, so it's converted to float32.
     if x.dtype == np.float16:
         x = x.astype(np.float32)
+    # If axis is None, use all indices
+    if axis is None:
+        axis = list(range(len(x.shape)))
     # If axis is not an iterable, convert it to a list
     axis = _axis_to_iterable(axis)
     # int is also considered for the cases q = 0 or q = 1
@@ -68,7 +74,7 @@ def nanquantile(
     return result
 
 
-def _validate_q(q):
+def _validate_q(q: Iterable):
     for q in q:
         if q < 0 or q > 1:
             raise ValueError("Quantile value must be between 0 and 1")
