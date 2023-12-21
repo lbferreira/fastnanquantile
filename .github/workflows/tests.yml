@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: [3.8, 3.9, 3.10, 3.11]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+          activate-environment: fastnanquantile-dev
+          environment-file: environment-dev.yml
+          auto-activate-base: false
+          miniforge-version: latest
+          miniforge-variant: Mambaforge
+          use-mamba: true
+          python-version: ${{ matrix.python-version }}
+
+    - name: Package Test
+      run: pytest

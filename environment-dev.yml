@@ -1,0 +1,23 @@
+name: fastnanquantile-dev
+channels:
+    - conda-forge
+dependencies:
+    - python=3.10.*
+    # required
+    - numba
+    - numpy
+    
+    # testing
+    - pytest
+    - pytest-cov
+    - coverage
+    
+    # linting
+    - flake8
+
+    # styling
+    - black
+    #- pre-commit
+    - pip
+    - pip:
+        .
