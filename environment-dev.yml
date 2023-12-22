@@ -6,6 +6,7 @@ dependencies:
     # required
     - numba
     - numpy
+    - xarray[parallel]
     
     # testing
     - pytest
