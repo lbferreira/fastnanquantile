@@ -42,7 +42,7 @@ def test_nanquantile_against_numpy(
     # Check if the result is the same as numpy
     expected = np.nanquantile(sample_data, q=q, axis=axis)
     result = fnq.nanquantile(sample_data, q=q, axis=axis)
-    np.testing.assert_almost_equal(expected, result, decimal=4)
+    np.testing.assert_almost_equal(result, expected, decimal=4)
 
 
 def test_nanquantile_against_numpy_empty_array():
