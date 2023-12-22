@@ -57,7 +57,7 @@ def nanquantile(
     # Move reduction axis to the end
     axis_destination = [-1 * i for i in range(1, len(axis) + 1)]
     x = np.moveaxis(x, axis, axis_destination)
-    # Reduction axis is kept as the last (sencond) dimension and the rest is flattened to be compatible with _jit_nanquantile_sorted
+    # Reduction axis is kept as the last (second) dimension and the rest is flattened to be compatible with _jit_nanquantile_sorted
     reduction_dim_size = 1
     for axis_value in axis_destination:
         reduction_dim_size *= x.shape[axis_value]
