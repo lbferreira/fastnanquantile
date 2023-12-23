@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import xarray
 
-from fastnanquantile import xr
+from fastnanquantile import xrcompat
 
 
 def _assert_indexes_equal(expected: xarray.DataArray, result: xarray.DataArray) -> None:
@@ -68,6 +68,6 @@ def test_xr_apply_nanquantile_against_xarray(q, dim):
     # Generate sample data
     da = _generate_dataarray(["t", "x", "y"], [50, 100, 100])
     expected = da.quantile(q=q, dim=dim, skipna=True)
-    result = xr.xr_apply_nanquantile(da, q=q, dim=dim)
+    result = xrcompat.xr_apply_nanquantile(da, q=q, dim=dim)
     np.testing.assert_almost_equal(result.values, expected.values, decimal=4)
     _assert_indexes_equal(expected, result)
