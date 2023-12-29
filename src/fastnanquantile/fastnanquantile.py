@@ -12,6 +12,9 @@ def nanquantile(
     However, in some cases (depending on the array shape and reduction axis),
     numpy.nanquantile can be faster. But this function is generally much faster.
     Some performance comparisons are shown below.
+    If x is a MaskedArray, the behavior of this function is different from numpy.nanquantile.
+    In this function, masked values are handled as NaNs and the returned array is a conventional numpy array.
+    It's equivalent to pass x.filled(np.nan) to numpy.nanquantile.
 
     Considering x = np.random.random((50, 500, 500)),
     >>> for axis=0, numpy.nanquantile needs 14000 ms (14s) and this function needs 228 ms (after first run);
@@ -26,6 +29,9 @@ def nanquantile(
     Returns:
         np.ndarray: array with the quantile value(s) calculated.
     """
+    # Check input type
+    if not isinstance(x, np.ndarray):
+        raise TypeError("Input must be a numpy array")
     # Handle empty array to make the output compatible with numpy.nanquantile
     if x.size == 0:
         return np.nanquantile(x, q, axis)

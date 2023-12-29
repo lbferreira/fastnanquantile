@@ -38,9 +38,15 @@ def test_nanquantile_against_numpy(
     # Generate sample data
     rng = np.random.default_rng(0)  # Create a generator with seed 0
     sample_data = rng.random(array_shape)  # Use the generator to create the array
-    sample_data[sample_data > 0.95] = np.nan
+    sample_data[sample_data < 0.2] = np.nan
     # Check if the result is the same as numpy
     expected = np.nanquantile(sample_data, q=q, axis=axis)
+    result = fnq.nanquantile(sample_data, q=q, axis=axis)
+    np.testing.assert_almost_equal(result, expected, decimal=4)
+    # Repeat the test using masked arrays
+    sample_data = np.ma.masked_invalid(sample_data)
+    # The expected result is the same as numpy using a conventional array (or masked_array.filled(np.nan))
+    expected = np.nanquantile(sample_data.filled(np.nan), q=q, axis=axis)
     result = fnq.nanquantile(sample_data, q=q, axis=axis)
     np.testing.assert_almost_equal(result, expected, decimal=4)
 
