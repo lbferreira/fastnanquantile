@@ -1,5 +1,8 @@
 # Figures
 *.png
+# Allow png figures in docs folder
+!docs/**/*.png
+
 
 ###### Python general ######
 
