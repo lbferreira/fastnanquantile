@@ -1,7 +1,14 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Tests](https://github.com/lbferreira/fastnanquantile/actions/workflows/tests.yml/badge.svg)
 # fastnanquantile
-An alternative implementation of numpy's nanquantile function. It's faster in many cases, especially for 2D and 3D arrays. 
+An alternative implementation of numpy's nanquantile function. It's faster in many cases, especially for 2D and 3D arrays.
+Note that np.quantile is much faster than np.nanquantile, but it doesn't support NaN values. This package is intended to be used when NaN values are present in the data.
+
+## Installation
+To install the package, run the command below
+```
+pip install git+https://github.com/lbferreira/fastnanquantile
+```
 
 ## Usage
 The function was designed to be very similar to numpy's nanquantile function. 
@@ -14,12 +21,13 @@ sample_data = np.random.random((50, 100, 100))
 start = time.time()
 np_result = np.nanquantile(sample_data, q=0.6, axis=0)
 print(f'Time for np.nanquantile: {time.time() - start}s')
-# Printed: Time for np.nanquantile: 0.26587748527526855s
+# Printed: Time for np.nanquantile: 0.2658s
 start = time.time()
 fnq_result = fnq.nanquantile(sample_data, q=0.6, axis=0)
 print(f'Time for fnq.nanquantile: {time.time() - start}s')
-# Printed: Time for fnq.nanquantile: 0.009999752044677734s
-# Disclaimer: The time for the first call to fnq.nanquantile is slower than the following calls, due to the compilation of the function.
+# Printed: Time for fnq.nanquantile: 0.0099s
+# Disclaimer: The time for the first call to fnq.nanquantile is slower than
+# the following calls, due to the compilation time of the function.
 ```
 
 ## Xarray compatible function
@@ -50,8 +58,3 @@ Some benchmarks were made to compare the performance of fastnanquantile with num
 ![](./docs/benchmarks/benchmark_2d_array.png)
 ![](./docs/benchmarks/benchmark_3d_array.png)
 
-## Installation
-To install the package, run the command below
-```
-pip install git+https://github.com/lbferreira/rasterexplorer
-```
