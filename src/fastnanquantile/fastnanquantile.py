@@ -115,17 +115,17 @@ def _jit_nanquantile_sorted(x2d: np.ndarray, q: Tuple[float]) -> np.ndarray:
     nb_quantiles = len(q)
     out = np.zeros((nb_quantiles, x2d.shape[0]), dtype=x2d.dtype)
     for x2d_idx in range(x2d.shape[0]):
-        pixel_data = x2d[x2d_idx, :]
-        pixel_data = pixel_data[~np.isnan(pixel_data)]
+        data = x2d[x2d_idx, :]
+        data = data[~np.isnan(data)]
 
         # Quantile calculation
-        n = len(pixel_data)
+        n = len(data)
         # Handle cases in which we have zero or one element
         if n == 0:
             out[:, x2d_idx] = np.nan
             continue
         if n == 1:
-            out[:, x2d_idx] = pixel_data[0]
+            out[:, x2d_idx] = data[0]
             continue
 
         # These alpha and beta values are referring to the method "linear" in numpy.percentile
@@ -139,7 +139,7 @@ def _jit_nanquantile_sorted(x2d: np.ndarray, q: Tuple[float]) -> np.ndarray:
             j_weight = g
             i = i - 1  # As python index starts at 0
             # Data is assumed to be sorted
-            result = i_weight * pixel_data[i] + j_weight * pixel_data[i + 1]
+            result = i_weight * data[i] + j_weight * data[i + 1]
             # Assign result
             out[ith_q_idx, x2d_idx] = result
     return out
