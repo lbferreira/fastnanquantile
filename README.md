@@ -70,6 +70,6 @@ Based on the benchmark results, we can conclude:
 
 ## Acknowledgements
 This library was developed as part of
-my research work in the [GCER lab](https://www.gcerlab.com/) at the Mississippi State University (MSU).
+my research work in the [GCER lab](https://www.gcerlab.com/), under supervision of Vitor Martins, at the Mississippi State University (MSU).
 
 This research is funded by USDA NIFA (award #2023-67019-39169), supporting Lucas Ferreira and Vitor Martins at MSU.
