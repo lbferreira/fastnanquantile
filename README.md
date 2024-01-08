@@ -59,3 +59,11 @@ Some benchmarks were made to compare the performance of fastnanquantile with num
 ![](./docs/benchmarks/benchmark_2d_array.png)
 ![](./docs/benchmarks/benchmark_3d_array.png)
 
+**Benchmarks conclusions**
+
+The performance gains offered by the fastnanquantile implementation depends on the shape of the input array.
+Based on the benchmark results, we can conclude:
+- 1D arrays: numpy is faster.
+- 2D arrays: fastnanquantile is faster for arrays with axis with sizes noticeably different from each other (example: (50, 1000)).
+- 3D arrays: fastnanquantile is generally faster, especially when the reduction axis is smaller than the other ones. For example, with shape=(50, 1000, 1000) and reduction axis=0, fastnanquantile is a lot faster than numpy.
+- Finally, fastnanquantile can be a good alternative in many cases, with potential to offer great speedups in some cases.
