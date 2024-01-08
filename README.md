@@ -67,3 +67,9 @@ Based on the benchmark results, we can conclude:
 - 2D arrays: fastnanquantile is faster for arrays with axis with sizes noticeably different from each other (example: (50, 1000)).
 - 3D arrays: fastnanquantile is generally faster, especially when the reduction axis is smaller than the other ones. For example, with shape=(50, 1000, 1000) and reduction axis=0, fastnanquantile is a lot faster than numpy.
 - Finally, fastnanquantile can be a great alternative in many cases, especially for 2D and 3D arrays, with potential to greatly speedup quantiles computation.
+
+## Acknowledgements
+This library was developed as part of
+my research work in the [GCER lab](https://www.gcerlab.com/) at the Mississippi State University (MSU).
+
+This research is funded by USDA NIFA (award #2023-67019-39169), supporting Lucas Ferreira and Vitor Martins at MSU.
