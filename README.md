@@ -8,7 +8,7 @@ Note that np.quantile is much faster than np.nanquantile, but it doesn't support
 ## Installation
 To install the package, run the command below
 ```
-pip install git+https://github.com/lbferreira/fastnanquantile
+pip install fastnanquantile
 ```
 
 ## Usage
