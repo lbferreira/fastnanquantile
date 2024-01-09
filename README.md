@@ -49,7 +49,7 @@ result_xr = da.quantile(q=0.6, dim="time")
 # fastnanquantile (time to run: <1s)
 result_fnq = xrcompat.xr_apply_nanquantile(da, q=0.6, dim="time")
 # Check if results are equal (If results are different, an error will be raised)
-np.testing.assert_almost_equal(result_fnq.values, result_result_xrfnq.values, decimal=4)
+np.testing.assert_almost_equal(result_fnq.values, result_xr.values, decimal=4)
 ```
 A case study using Xarray + Dask to create time composites from satelitte images can be found in this notebook: [examples/example_xarray.ipynb](examples/example_xarray.ipynb).
 
