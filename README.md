@@ -2,6 +2,7 @@
 ![Tests](https://github.com/lbferreira/fastnanquantile/actions/workflows/tests.yml/badge.svg)
 [![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/lbferreira/fastnanquantile/blob/main)
 [![image](https://img.shields.io/pypi/v/fastnanquantile.svg)](https://pypi.python.org/pypi/fastnanquantile)
+[![Downloads](https://static.pepy.tech/badge/fastnanquantile)](https://pepy.tech/project/fastnanquantile)
 # fastnanquantile
 An alternative implementation of numpy's nanquantile function. It's faster in many cases, especially for 2D and 3D arrays.
 Note that np.quantile is much faster than np.nanquantile, but it doesn't support NaN values. This package is intended to be used when NaN values are present in the data.
