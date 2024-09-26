@@ -10,9 +10,13 @@ An alternative implementation of numpy's nanquantile function. It's faster in ma
 Note that np.quantile is much faster than np.nanquantile, but it doesn't support NaN values. This package is intended to be used when NaN values are present in the data.
 
 ## Installation
-To install the package, run the command below
+To install the package using pip:
 ```
 pip install fastnanquantile
+```
+To install the package using conda:
+```
+conda install -c conda-forge fastnanquantile
 ```
 
 ## Usage
